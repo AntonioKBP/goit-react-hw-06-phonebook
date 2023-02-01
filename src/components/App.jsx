@@ -58,12 +58,6 @@ export const App = () => {
     setContacts(prevState => prevState.filter(item => item.id !== contactId));
   };
 
-  // const handleSearchInput = useMemo(() => {
-  //   return contacts.filter(contact =>
-  //     contact.name.toLowerCase().includes(filter.toLowerCase())
-  //   );
-  // }, [contacts, filter]);
-
   const contactsLenght = contacts.length;
   const newUsers = contacts.filter(contact =>
     contact.name.toLowerCase().includes(filter.toLowerCase())
@@ -81,75 +75,6 @@ export const App = () => {
       )}
     </Main>
   );
-
-  // componentDidMount() {
-  //   const contacts = localStorage.getItem('contacts');
-  //   const ParcedContacts = JSON.parse(contacts);
-  //   if (ParcedContacts) {
-  //     this.setState({ contacts: ParcedContacts });
-  //   }
-  // }
-
-  // componentDidUpdate(_, prevState) {
-  //   if (this.state.contacts.length !== prevState.contacts.length) {
-  //     localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
-  //   }
-  // }
-
-  // addUser = data => {
-  //   const findExistsName = this.state.contacts.some(
-  //     contact => contact.name === data.name
-  //   );
-  //   if (findExistsName) {
-  //     Notify.warning(`${data.name} is already in contacts`);
-  //     return;
-  //   } else {
-  //     const newAbonent = {
-  //       id: nanoid(),
-  //       ...data,
-  //     };
-  //     this.setState(prevState => ({
-  //       contacts: [...prevState.contacts, newAbonent],
-  //     }));
-  //   }
-  // };
-
-  // handleSearch = e => {
-  //   this.setState({ filter: e.target.value });
-  // };
-
-  // handleDeleteContact = contactId => {
-  //   this.setState(prevState => ({
-  //     contacts: prevState.contacts.filter(item => item.id !== contactId),
-  //   }));
-  //   return;
-  // };
-
-  // render() {
-  //   const contactsLenght = this.state.contacts.length;
-  //   // console.log(contactsLenght);
-  //   const { contacts, filter } = this.state;
-  //   const newUsers = contacts.filter(contact =>
-  //     contact.name.toLowerCase().includes(filter.toLowerCase())
-  //   );
-  //   // console.log(newUsers);
-
-  //   return (
-  //     <Main>
-  //       <MainTitle>PhoneBook</MainTitle>
-  //       <ContactForm onSubmit={this.addUser} />
-
-  //       <SecondartTitle>Contacts</SecondartTitle>
-  //       <Filter filterValue={filter} onSearch={this.handleSearch} />
-  //       {contactsLenght > 0 && (
-  //         <ContactList
-  //           users={newUsers}
-  //           onDeleteContact={this.handleDeleteContact}
-  //         />
-  //       )}
-  //     </Main>
-  //   );
-  // }
 };
 
 App.propTypes = {
