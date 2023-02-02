@@ -1,9 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from 'nanoid';
 import { Notify } from 'notiflix';
 import PropTypes from 'prop-types';
 import { FILTER } from 'redux/users/users.types';
+
+import {
+  userAddAction,
+  userDeleteAction,
+  userFilterAction,
+} from 'redux/users/users.actions';
 
 import { ContactForm } from './ContactForm/ContactForm';
 import { Filter } from './Filter/Filter';
@@ -16,13 +22,8 @@ import {
 } from './TitleAndMainStyled/TitleAndMainStyled.styled';
 
 export const App = () => {
-  const [contacts, setContacts] = useState([
-    { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-    { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-    { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-    { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-  ]);
   const filter = useSelector(state => state.filter);
+  const contacts = useSelector(state => state.contacts);
 
   useEffect(() => {
     console.log('mount');
@@ -30,7 +31,7 @@ export const App = () => {
     const ParcedContacts = JSON.parse(contacts);
     console.log(ParcedContacts);
     if (ParcedContacts) {
-      setContacts(ParcedContacts);
+      // setContacts(ParcedContacts);
     }
   }, []);
 
@@ -48,17 +49,19 @@ export const App = () => {
         id: nanoid(),
         ...data,
       };
-      setContacts(prevState => [newAbonent, ...prevState]);
+      dispatch(userAddAction(newAbonent));
+      // setContacts(prevState => [newAbonent, ...prevState]);
     }
   };
 
   const dispatch = useDispatch();
 
   const handleSearch = e => {
-    dispatch({ type: FILTER, payload: e.target.value });
+    dispatch(userFilterAction(e.target.value));
   };
   const handleDeleteContact = contactId => {
-    setContacts(prevState => prevState.filter(item => item.id !== contactId));
+    dispatch(userDeleteAction(contactId));
+    // setContacts(prevState => prevState.filter(item => item.id !== contactId));
   };
 
   const contactsLenght = contacts.length;
