@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from 'nanoid';
 import { Notify } from 'notiflix';
 import PropTypes from 'prop-types';
+import { FILTER } from 'redux/users/users.types';
 
 import { ContactForm } from './ContactForm/ContactForm';
 import { Filter } from './Filter/Filter';
@@ -20,7 +22,7 @@ export const App = () => {
     { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
     { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
   ]);
-  const [filter, setFilter] = useState('');
+  const filter = useSelector(state => state.filter);
 
   useEffect(() => {
     console.log('mount');
@@ -50,10 +52,11 @@ export const App = () => {
     }
   };
 
-  const handleSearch = e => {
-    setFilter(e.target.value);
-  };
+  const dispatch = useDispatch();
 
+  const handleSearch = e => {
+    dispatch({ type: FILTER, payload: e.target.value });
+  };
   const handleDeleteContact = contactId => {
     setContacts(prevState => prevState.filter(item => item.id !== contactId));
   };

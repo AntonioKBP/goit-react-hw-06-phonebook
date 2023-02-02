@@ -1,1 +1,4 @@
-export const usersInitState = { contacts: [], filter: '' };
+export const initState = {
+  contacts: [],
+  filter: '',
+};
