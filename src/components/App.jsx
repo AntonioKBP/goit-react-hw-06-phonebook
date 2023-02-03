@@ -25,10 +25,10 @@ export const App = () => {
   const contacts = useSelector(state => state.contacts);
 
   useEffect(() => {
-    console.log('mount');
+    // console.log('mount');
     const contacts = localStorage.getItem('contacts');
     const ParcedContacts = JSON.parse(contacts);
-    console.log(ParcedContacts);
+    // console.log(ParcedContacts);
     if (ParcedContacts) {
       // setContacts(ParcedContacts);
     }
