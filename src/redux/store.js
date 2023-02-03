@@ -1,13 +1,13 @@
 import { createStore } from 'redux';
 import { devToolsEnhancer } from '@redux-devtools/extension';
-import { usersReducer } from './users/users.reducer';
+import { phoneBookReducer } from './users/users.reducer';
 import { initState } from './users/users.init-state';
 // import { usersReducer } from './users/users.reducer';
 // import { usersInitState } from './users/users.init-state';
 
 const enhancer = devToolsEnhancer();
 
-export const store = createStore(usersReducer, initState, enhancer);
+export const store = createStore(phoneBookReducer, initState, enhancer);
 
 // const contactsReducer = (state = [], action) => {};
 
