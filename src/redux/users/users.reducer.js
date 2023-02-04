@@ -1,28 +1,48 @@
 import { initState } from './users.init-state';
-import { ADD_USER, FILTER, DELETE_USER } from './users.types';
-import { combineReducers } from 'redux';
+// import { ADD_USER, FILTER, DELETE_USER } from './users.types';
+// import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
+import {
+  userAddAction,
+  userDeleteAction,
+  userFilterAction,
+} from './users.actions';
 
-export const contactsReducer = createReducer(initState, builder => {
+export const phoneBookReducer = createReducer(initState, builder => {
   builder
-    .addCase(ADD_USER, (state, { payload }) => {
-      return [payload, ...state];
+    .addCase(userAddAction, (state, { payload }) => {
+      state.contacts = [payload, ...state.contacts];
     })
-    .addCase(DELETE_USER, (state, { payload }) => {
-      return state.filter(user => user.id !== payload);
+    .addCase(userDeleteAction, (state, { payload }) => {
+      state.contacts = state.contacts.filter(user => user.id !== payload);
+    })
+    .addCase(userFilterAction, (state, { payload }) => {
+      state.filter = payload;
     });
 });
 
-export const filterReducer = createReducer(initState, builder => {
-  builder.addCase(FILTER, (state, { payload }) => {
-    return payload;
-  });
-});
+// export const contactsReducer = createReducer(initState.contacts, builder => {
+//   builder
+//     .addCase(userAddAction, (state, { payload }) => {
+//       return [payload, ...state];
+//     })
+//     .addCase(userDeleteAction, (state, { payload }) => {
+//       return state.filter(user => user.id !== payload);
+//     });
+// });
 
-export const phoneBookReducer = combineReducers({
-  contacts: contactsReducer,
-  filter: filterReducer,
-});
+// export const filterReducer = createReducer(initState.filter, builder => {
+//   builder.addCase(userFilterAction, (_, { payload }) => {
+//     return payload;
+//   });
+// });
+
+// export const phoneBookReducer = combineReducers({
+//   contacts: contactsReducer,
+//   filter: filterReducer,
+// });
+
+// ======================== Step-by-step guide from clean redux to toolkit =============
 
 // ======================== Clean Redux All reducers in one ========================
 
@@ -108,6 +128,24 @@ export const phoneBookReducer = combineReducers({
 
 // export const filterReducer = createReducer(initState, builder => {
 //   builder.addCase(FILTER, (state, { payload }) => {
+//     return payload;
+//   });
+// });
+
+// ========================== Separated Reducers with combineReducers Modern =====================================
+
+// export const contactsReducer = createReducer(initState.contacts, builder => {
+//   builder
+//     .addCase(userAddAction, (state, { payload }) => {
+//       return [payload, ...state];
+//     })
+//     .addCase(userDeleteAction, (state, { payload }) => {
+//       return state.filter(user => user.id !== payload);
+//     });
+// });
+
+// export const filterReducer = createReducer(initState.filter, builder => {
+//   builder.addCase(userFilterAction, (_, { payload }) => {
 //     return payload;
 //   });
 // });
