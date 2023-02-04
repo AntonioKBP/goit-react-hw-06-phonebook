@@ -16,3 +16,8 @@ const phoneBookSlice = createSlice({
     },
   },
 });
+
+export const { userAddAction, userDeleteAction, userFilterAction } =
+  phoneBookSlice.actions;
+
+export const phoneBookReducer = phoneBookSlice.reducer;

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from 'nanoid';
 import { Notify } from 'notiflix';
@@ -8,7 +8,7 @@ import {
   userAddAction,
   userDeleteAction,
   userFilterAction,
-} from 'redux/users/users.actions';
+} from 'redux/users/users.slice';
 
 import { ContactForm } from './ContactForm/ContactForm';
 import { Filter } from './Filter/Filter';
@@ -24,19 +24,19 @@ export const App = () => {
   const filter = useSelector(state => state.filter);
   const contacts = useSelector(state => state.contacts);
 
-  useEffect(() => {
-    // console.log('mount');
-    const contacts = localStorage.getItem('contacts');
-    const ParcedContacts = JSON.parse(contacts);
-    // console.log(ParcedContacts);
-    if (ParcedContacts) {
-      // setContacts(ParcedContacts);
-    }
-  }, []);
+  // useEffect(() => {
+  //   console.log('mount');
+  //   const contacts = localStorage.getItem('contacts');
+  //   const ParcedContacts = JSON.parse(contacts);
+  //   console.log(ParcedContacts);
+  //   if (ParcedContacts) {
+  //     // setContacts(ParcedContacts);
+  //   }
+  // }, []);
 
-  useEffect(() => {
-    localStorage.setItem('contacts', JSON.stringify(contacts));
-  }, [contacts]);
+  // useEffect(() => {
+  //   localStorage.setItem('contacts', JSON.stringify(contacts));
+  // }, [contacts]);
 
   const addUser = data => {
     const findExistsName = contacts.some(contact => contact.name === data.name);

@@ -1,25 +1,25 @@
-import { initState } from './users.init-state';
+// import { initState } from './users.init-state';
 // import { ADD_USER, FILTER, DELETE_USER } from './users.types';
 // import { combineReducers } from 'redux';
-import { createReducer } from '@reduxjs/toolkit';
-import {
-  userAddAction,
-  userDeleteAction,
-  userFilterAction,
-} from './users.actions';
+// import { createReducer } from '@reduxjs/toolkit';
+// import {
+//   userAddAction,
+//   userDeleteAction,
+//   userFilterAction,
+// } from './users.actions';
 
-export const phoneBookReducer = createReducer(initState, builder => {
-  builder
-    .addCase(userAddAction, (state, { payload }) => {
-      state.contacts = [payload, ...state.contacts];
-    })
-    .addCase(userDeleteAction, (state, { payload }) => {
-      state.contacts = state.contacts.filter(user => user.id !== payload);
-    })
-    .addCase(userFilterAction, (state, { payload }) => {
-      state.filter = payload;
-    });
-});
+// export const phoneBookReducer = createReducer(initState, builder => {
+//   builder
+//     .addCase(userAddAction, (state, { payload }) => {
+//       state.contacts = [payload, ...state.contacts];
+//     })
+//     .addCase(userDeleteAction, (state, { payload }) => {
+//       state.contacts = state.contacts.filter(user => user.id !== payload);
+//     })
+//     .addCase(userFilterAction, (state, { payload }) => {
+//       state.filter = payload;
+//     });
+// });
 
 // export const contactsReducer = createReducer(initState.contacts, builder => {
 //   builder
@@ -154,3 +154,41 @@ export const phoneBookReducer = createReducer(initState, builder => {
 //   contacts: contactsReducer,
 //   filter: filterReducer,
 // });
+
+// ============================= All in one Reducers without combineReducers Modern ====================
+
+// export const phoneBookReducer = createReducer(initState, builder => {
+//   builder
+//     .addCase(userAddAction, (state, { payload }) => {
+//       state.contacts = [payload, ...state.contacts];
+//     })
+//     .addCase(userDeleteAction, (state, { payload }) => {
+//       state.contacts = state.contacts.filter(user => user.id !== payload);
+//     })
+//     .addCase(userFilterAction, (state, { payload }) => {
+//       state.filter = payload;
+//     });
+// });
+
+// ============================= Finally all in one toolkit createSlice ===================
+
+// const phoneBookSlice = createSlice({
+//   name: 'users',
+//   initialState: initState,
+//   reducers: {
+//     userAddAction: (state, { payload }) => {
+//       state.contacts = [payload, ...state.contacts];
+//     },
+//     userDeleteAction: (state, { payload }) => {
+//       state.contacts = state.contacts.filter(user => user.id !== payload);
+//     },
+//     userFilterAction: (state, { payload }) => {
+//       state.filter = payload;
+//     },
+//   },
+// });
+
+// export const { userAddAction, userDeleteAction, userFilterAction } =
+//   phoneBookSlice.actions;
+
+// export const phoneBookReducer = phoneBookSlice.reducer;
