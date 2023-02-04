@@ -6,7 +6,6 @@ import { initState } from './users/users.init-state';
 import { phoneBookReducer } from './users/users.slice';
 import {
   persistStore,
-  persistReducer,
   FLUSH,
   REHYDRATE,
   PAUSE,
@@ -14,7 +13,6 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
 
 // import { usersReducer } from './users/users.reducer';
 // import { usersInitState } from './users/users.init-state';
@@ -28,18 +26,10 @@ import storage from 'redux-persist/lib/storage';
 
 // export const store = createStore(phoneBookReducer, initState, enhancer);
 
-const persistConfig = {
-  key: 'phone-book-data',
-  storage,
-  blacklist: ['filter'],
-};
-
-const persistedReducer = persistReducer(persistConfig, phoneBookReducer);
-
 export const store = configureStore({
   devTools: true,
   preloadedState: initState,
-  reducer: persistedReducer,
+  reducer: phoneBookReducer,
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {
